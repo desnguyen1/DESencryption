@@ -16,7 +16,6 @@ string binaryConversion();
 string getPlaintext();
 void get64BitBlock();
 void to_ascii();
-string removeExtraBits();
 
 string binaryConversion(string key){
     int asciiValue;
@@ -88,12 +87,6 @@ void get64BitBlock(string& text, string& bitBlock, int& len){
     }
 
 }
-string removeExtraBits(string decryptedText, string originalText){
-    string output;
-
-
-    return output;
-}
 
 string getPlaintext(){
     string plaintext;
@@ -106,14 +99,14 @@ int main() {
     string key;
     string plaintext="",ciphertext="", plaintextCopy="";
     string plainFromCiph = ""; //gets plaintext from decryption
-    string asciiPlain=""; //plaintext in ASCII
+    string asciiPlain="", asciiCiph=""; //plaintext/ciphertext in ASCII
     string bitBlock="";
     string subKeys[16];
     int len;
 
     plaintext = getPlaintext();
     plaintext=binaryConversion(plaintext);
-    cout<<"\nplaintext in binary: "<<plaintext;
+    cout<<"\nplaintext in binary: "<<plaintext<<endl;
     plaintextCopy = plaintext;
     //cout<<"\ncopy plain: "<<plaintextCopy;
     //cout<<"\nplaintext length: "<<plaintext.length();
@@ -137,7 +130,7 @@ int main() {
         ciphertext += des(bitBlock, subKeys);
         //cout<<"\ncipher: "<<ciphertext;
     }
-    cout<<"\nCiphertext: "<<ciphertext;
+    cout<<"\nCiphertext: "<<ciphertext<<endl;
     //cout<<"\nlength:"<<ciphertext.length();
 
     //decryption
@@ -159,10 +152,8 @@ int main() {
     //cout<<"\nlength:"<<plainFromCiph.length();
     //convert to ascii
     to_ascii(plainFromCiph, asciiPlain);
-    cout<<"\nplaintext ASCII:"<<asciiPlain;
+    cout<<"\nplaintext ASCII:"<<asciiPlain<<endl;
 
 
     return 0;
 }
-
-//TODO: while loop 64bit blocks

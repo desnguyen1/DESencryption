@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+//for bit to ascii conversion
+#include <sstream>
+#include <bitset>
 #include "des.h"
 #include "keyScheduling.h"
 
@@ -12,6 +15,7 @@ using std::string;
 string binaryConversion();
 string getPlaintext();
 void get64BitBlock();
+void to_ascii();
 
 string binaryConversion(string key){
     int asciiValue;
@@ -52,6 +56,16 @@ string binaryConversion(string key){
     return binaryKey;
 }
 
+void to_ascii(string str, string& output){
+    std::stringstream sstream(str);
+    while(sstream.good()){
+        std::bitset<8>bits;
+        sstream >> bits;
+        char c = char(bits.to_ulong());
+        output +=c;
+    }
+}
+
 void get64BitBlock(string& text, string& bitBlock, int& len){
     string totalPlaintext="";
     if(text.length() > 64){
@@ -82,17 +96,19 @@ string getPlaintext(){
 
 int main() {
     string key;
-    string plaintext="",ciphertext="", plaintextCopy="", plainFromCiph = "";
+    string plaintext="",ciphertext="", plaintextCopy="";
+    string plainFromCiph = ""; //gets plaintext from decryption 
+    string asciiPlain=""; //plaintext in ASCII
     string bitBlock="";
     string subKeys[16];
     int len;
 
     plaintext = getPlaintext();
     plaintext=binaryConversion(plaintext);
-    cout<<"\nplaintext: "<<plaintext;
+    cout<<"\nplaintext in binary: "<<plaintext;
     plaintextCopy = plaintext;
-    cout<<"\ncopy plain: "<<plaintextCopy;
-    cout<<"\nplaintext length: "<<plaintext.length();
+    //cout<<"\ncopy plain: "<<plaintextCopy;
+    //cout<<"\nplaintext length: "<<plaintext.length();
     key = getKey();
     while (key.length() != 8) {
         key = getKey();
@@ -102,19 +118,19 @@ int main() {
     //key scheduling
     generateSubKeys(key,subKeys);
     len = plaintextCopy.length();
+
+    cout << "\nBeginning encryption.....";
     while(len > 0) {
-        cout<<"\nplain copy len: "<<len;
+        //cout<<"\nplain copy len: "<<len;
         //get 64 bit blocks of plaintext
         get64BitBlock(plaintextCopy, bitBlock, len);
         //cout<<"\nplain copy len: "<<len;
 
-        //begin encryption
-        cout << "\nBeginning encryption.....";
         ciphertext += des(bitBlock, subKeys);
         //cout<<"\ncipher: "<<ciphertext;
     }
     cout<<"\nCiphertext: "<<ciphertext;
-    cout<<"\nlength:"<<ciphertext.length();
+    //cout<<"\nlength:"<<ciphertext.length();
 
     //decryption
     bitBlock = "";
@@ -124,7 +140,7 @@ int main() {
     generateSubKeysDecryption(key, subKeys);
     len = ciphertext.length();
     while(len>0){
-        cout<<"\ncipher length: "<<len;
+        //cout<<"\ncipher length: "<<len;
 
         //get 64bit blocks
         get64BitBlock(ciphertext,bitBlock, len);
@@ -132,7 +148,10 @@ int main() {
         plainFromCiph += des(bitBlock, subKeys);
     }
     cout<<"\nPlaintext: "<<plainFromCiph;
-    cout<<"\nlength:"<<plainFromCiph.length();
+    //cout<<"\nlength:"<<plainFromCiph.length();
+    //convert to ascii
+    to_ascii(plainFromCiph, asciiPlain);
+    cout<<"\nplaintext ascii:"<<asciiPlain;
 
 
     return 0;

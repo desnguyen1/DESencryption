@@ -97,7 +97,7 @@ string getPlaintext(){
 int main() {
     string key;
     string plaintext="",ciphertext="", plaintextCopy="";
-    string plainFromCiph = ""; //gets plaintext from decryption 
+    string plainFromCiph = ""; //gets plaintext from decryption
     string asciiPlain=""; //plaintext in ASCII
     string bitBlock="";
     string subKeys[16];
@@ -151,7 +151,7 @@ int main() {
     //cout<<"\nlength:"<<plainFromCiph.length();
     //convert to ascii
     to_ascii(plainFromCiph, asciiPlain);
-    cout<<"\nplaintext ascii:"<<asciiPlain;
+    cout<<"\nplaintext ASCII:"<<asciiPlain;
 
 
     return 0;

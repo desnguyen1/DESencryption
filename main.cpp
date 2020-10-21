@@ -16,6 +16,7 @@ string binaryConversion();
 string getPlaintext();
 void get64BitBlock();
 void to_ascii();
+string removeExtraBits();
 
 string binaryConversion(string key){
     int asciiValue;
@@ -87,6 +88,13 @@ void get64BitBlock(string& text, string& bitBlock, int& len){
     }
 
 }
+string removeExtraBits(string decryptedText, string originalText){
+    string output;
+
+
+    return output;
+}
+
 string getPlaintext(){
     string plaintext;
     cout<<"\nEnter text to decrypt: ";

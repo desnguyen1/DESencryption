@@ -8,8 +8,13 @@ CIS5371: Practical Aspects of Modern Cryptography
 Assignment - 02: DES Encryption/Decryption
 
 ## How to Run the Program
+Inside the terminal, make sure the file path is inside the project folder. Then
+run the following commands:
 
-## What Each File Contains
+`g++ *.cpp -o des`
+
+`./des`
+## File Contents
 
 main.cpp
 > Contains the general code to run the program and functions such as: 
@@ -34,7 +39,7 @@ keyScheduling.cpp
 > * get key from user
 > There are two functions, one specifically for encryption and the other for decryption
 
-## Program Tracing
+## Program Outline
 
 Encryption: 
 > Input: a message (plaintext) and secret key in ASCII
@@ -70,3 +75,6 @@ main.cpp
 ### Some Notes:
 The tables are from Wikipedia but was adjusted by 1 to fit in with the array format
 by beginning at index 0 instead of 1 (except s-boxes table was left alone).
+
+Also, the mode of operation used was Electronic Code Block (ECB)
+for easy implementation. 

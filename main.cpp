@@ -152,7 +152,7 @@ int main() {
     //cout<<"\nlength:"<<plainFromCiph.length();
     //convert to ascii
     to_ascii(plainFromCiph, asciiPlain);
-    cout<<"\nplaintext ASCII:"<<asciiPlain<<endl;
+    cout<<"\nplaintext ASCII: "<<asciiPlain<<endl;
 
 
     return 0;

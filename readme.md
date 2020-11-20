@@ -11,9 +11,9 @@ Assignment - 02: DES Encryption/Decryption
 Inside the terminal, make sure the file path is inside the project folder. Then
 run the following commands:
 
-`g++ *.cpp -o des`
+`g++ *.cpp -o output`
 
-`./des`
+`./output`
 ## File Contents
 
 main.cpp
